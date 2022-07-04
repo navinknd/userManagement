@@ -1,0 +1,31 @@
+<div class="container-fluid" style="padding-top:10%;" *ngIf="login">
+  <div class="col-md-4 mx-auto">
+        <form [formGroup]="loginForm" class="k-block" (ngSubmit)="onFormSubmit(loginForm.value)" autocomplete="off">
+          <h1 class="primary text-center ">Login</h1>
+          <div class="text-center">
+            <kendo-floatinglabel text="User Name">  
+              <input kendoTextBox  type="text" formControlName="userName" />
+            </kendo-floatinglabel>
+          </div>
+          <div class="text-center">
+            <kendo-floatinglabel text="password">
+              <input kendoTextBox [type]="password" formControlName="password" />
+            </kendo-floatinglabel>
+          </div>
+          <div class="passwordDiv text-center mt-3">
+            <div>
+              <p *ngIf="password=='password'" class="password">Show
+                Password<i class="fa-solid fa-eye passwordIcon secondary" (click)="show()"></i></p>
+              <p *ngIf="password=='text'" class="password">Hide
+                Password<i class="fa-solid fa-eye-slash passwordIcon secondary" (click)="unshow()"></i>
+              </p>
+            </div>
+            <button kendoButton type="submit"  [look]="'outline'">Login</button>
+           
+          </div>
+          <p class="mt-3 text-center">Don't have an account? <b class="success" (click)="showregister()">Register</b></p>
+        </form>
+  </div>
+</div>
+
+<app-register *ngIf="register"></app-register>

@@ -1,0 +1,6 @@
+:host ::ng-deep .k-grid-header .k-header:first-child {
+    font-size: 20px;
+   font-weight: bold;
+    color:#00153D;
+    text-align: center;
+}

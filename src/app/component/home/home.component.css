@@ -1,0 +1,58 @@
+.warning{
+    font-weight: 600;
+    color: white;
+    background-color: #f31700;
+}
+html,
+body,
+my-app {
+  padding: 0;
+  height: 100%;
+}
+
+my-app {
+  display: flex;
+  flex-direction: column;
+}
+
+kendo-drawer-container {
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+.k-icon {
+  font-size: 20px;
+}
+.custom-toolbar {
+  /* width: 100%; */
+  /* background-color:#003FC6; */
+  background-color: #004DD1;
+  line-height: 10px;
+  border-bottom: inset;
+  border-bottom-width: 1px;
+  padding: 8px 8px;
+  /* color: #656565; */
+  color: white;
+}
+.mail-box {
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+:host ::ng-deep  .k-drawer-item.k-state-selected, .k-drawer-item.k-selected li {
+  color: white;
+  background-color:#002466;
+  align-content: space-between;
+  padding: 10px;
+  /* margin-top: 40px; */
+}
+:host ::ng-deep  .k-drawer-items, .k-drawer-items ul {
+ display: flex !important;
+ row-gap: 10px; 
+ margin-top: 40px;
+}
+.User-Dashboard{
+  color: white;
+  font-weight: bold;
+  padding-left: 12px;
+}

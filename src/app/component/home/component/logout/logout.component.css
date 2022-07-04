@@ -1,0 +1,31 @@
+.icon-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 8%
+}
+
+.icon {
+    font-size: 25px
+}
+
+.header-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    height: 50vh;
+    margin-top: 8%;
+}
+
+.header {
+    text-align: center;
+    font-size: 50PX;
+    margin-top: 24%;
+    color: #004DD1;
+}
+
+.button-div {
+    margin-top: 10%;
+}
