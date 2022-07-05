@@ -103,7 +103,7 @@ export class RegisterComponent implements OnInit {
     registerData.mobileNumber = this.UserForm.value.mobileNumber;
     registerData.password = this.UserForm.value.password;
     this.loading = true;
-    this.loginservices.CreateUserData(registerData).subscribe({
+    this.loginservices.createUserData(registerData).subscribe({
       next: (res) => {
         this.loading = false;
         this.message = res;

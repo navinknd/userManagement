@@ -1,31 +1,24 @@
 <app-loader *ngIf="loading"></app-loader>
 
-<div class="container-fluid" style="padding-top:10%;">
-  <div class="col-md-4 mx-auto">
+<div class="container-fluid">
+  <div class="col-md-4 mx-auto " style="position:relative;top: 23%;">
     <form [formGroup]="UserForm" class="k-block" (ngSubmit)="onFormSubmit(UserForm.value)" autocomplete="off">
-      <h1 class="primary text-center ">Register</h1>
+      <h1 class="primary text-center pt-3">Register</h1>
       <div class="text-center">
         <kendo-floatinglabel text="fullname">
-          <input kendoTextBox type="text" formControlName="fullname"  autocomplete="off" />
+          <input kendoTextBox type="text" formControlName="fullname" autocomplete="off" />
         </kendo-floatinglabel>
       </div>
       <div class="text-center">
         <kendo-floatinglabel text="User Name">
-          <input kendoTextBox type="text" formControlName="userName"  autocomplete="off" />
+          <input kendoTextBox type="text" formControlName="userName" autocomplete="off" />
         </kendo-floatinglabel>
       </div>
       <div class="text-center">
         <kendo-floatinglabel text="Mobile Number">
-          <input kendoTextBox type="text" formControlName="mobileNumber" autocomplete="off"  />
+          <input kendoTextBox type="text" formControlName="mobileNumber" autocomplete="off" />
         </kendo-floatinglabel>
       </div>
-
-      <!-- for geting file values -->
-      <!-- <div class="text-center">
-                <kendo-floatinglabel >
-                  <input kendoTextBox type="file" formControlName="fileInput" #fileInput />
-                </kendo-floatinglabel>
-              </div> -->
       <div class="text-center">
         <kendo-floatinglabel text="password">
           <input kendoTextBox [type]="passwordType" formControlName="password" autocomplete="off" />
@@ -42,10 +35,8 @@
         <button kendoButton type="submit" [look]="'outline'">Register</button>
 
       </div>
-      <!-- <p class="mt-3 text-center">Already have an account? <b class="success" (click)="showlogin()">login</b></p> -->
-
       <p class="mt-3 text-center">Already have an account? <b class="success" (click)="showlogin()">login</b></p>
-  
+
     </form>
   </div>
 </div>

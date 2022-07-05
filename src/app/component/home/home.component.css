@@ -1,3 +1,9 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .warning{
     font-weight: 600;
     color: white;
@@ -32,11 +38,8 @@ kendo-drawer-container {
   padding: 8px 8px;
   /* color: #656565; */
   color: white;
-}
-.mail-box {
-  margin-left: 20px;
-  font-weight: bold;
-  font-size: 17px;
+  display: flex;
+  justify-content: space-between;
 }
 
 :host ::ng-deep  .k-drawer-item.k-state-selected, .k-drawer-item.k-selected li {
@@ -55,4 +58,10 @@ kendo-drawer-container {
   color: white;
   font-weight: bold;
   padding-left: 12px;
+}
+.matAcountIcon{
+  padding-right: 3%;
+  align-items: center;
+  justify-content: center;
+  
 }

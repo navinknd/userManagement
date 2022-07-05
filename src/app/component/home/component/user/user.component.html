@@ -1,100 +1,79 @@
 <kendo-grid [kendoGridBinding]="userslist" [pageSize]="pagesize" [pageable]="pagerSettings()" [resizable]="true"
-    [sortable]="true" [filterable]="true" [selectable]="false" (cellClick)="editUser($event)">
-    <!-- <ng-template kendoGridToolbarTemplate
-        kendoPagerTemplate
-        [position]="'top'"></ng-template>
-        <div class="pagination-container">
-            <p>Show</p>
-            <kendo-pager-page-sizes
-              [pageSizes]='pagesizes'
-             
-            ></kendo-pager-page-sizes>
-            <p>Items</p>
-            <div class="divider-container"><span></span></div>
-            <kendo-pager-prev-buttons
-              id="ibtPagination Button"
-            ></kendo-pager-prev-buttons>
-            <kendo-pager-input id="pageno-input" ></kendo-pager-input>
-            <kendo-pager-next-buttons
-              id="ibtPagination Button"
-            ></kendo-pager-next-buttons>
-          </div> -->
-    <kendo-grid-column-group class="group" title="User Details">
-        <kendo-grid-column field="id" title="ID" [width]="220" [headerStyle]="{
+  [sortable]="true" [filterable]="true" [selectable]="false" (cellClick)="editUser($event)">
+
+  <kendo-grid-column-group  title="User Details">
+    <kendo-grid-column field="id" title="ID" class="col-md-12"  [headerStyle]="{
             'background-color': '#004DD1',
             'color' : '#fff',
             'font-size':'13px',
-            'font-weight':'bold'
+            'font-weight':'bold',
+            'width':'10vw'
+         
           }" [style]="{
             'color': '#00153D',
-            'font-size' : '13px'
-        }" >
-            <ng-template kendoGridCellTemplate let-userslist #data  let-rowIndex="rowIndex" >
-                <!-- <div (click)="toggleField(userslist.id)" style="cursor: pointer;"> -->
-                  {{ userslist.id }} 
-                <!-- </div>
-                <div *ngIf="userslist.isVisible">
-                    <input type="text" kendoTextBox value="some data"> 
-                    <button kendoButton [look]="'outline'" (click)="updateField(userslist.id)">update</button>
-                </div>                 -->
-            </ng-template>          
-        </kendo-grid-column>
-        <kendo-grid-column field="fullName" title="Full Name" [width]="220" [headerStyle]="{
+            'font-size' : '13px',
+            'width':'10vw','text-align':'center'
+        }">
+      <ng-template kendoGridCellTemplate let-userslist #data let-rowIndex="rowIndex">
+        {{ userslist.id }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="fullName" title="Full Name" class="col-md-12" [headerStyle]="{
                 'background-color': '#004DD1',
                 'color' : '#fff',
                 'font-size':'13px',
-                'font-weight':'bold'
+                'font-weight':'bold',   'width':'10vw'
               }" [style]="{
                 'color': '#00153D',
-                'font-size' : '13px'
+                'font-size' : '13px',   'width':'10vw','text-align':'center'
             }">
-            <ng-template kendoGridCellTemplate let-userslist>
-                {{ userslist.fullName }}
-            </ng-template>
-        </kendo-grid-column>
-        <kendo-grid-column field="username" title="User Name" [width]="220" [headerStyle]="{
+      <ng-template kendoGridCellTemplate let-userslist>
+        {{ userslist.fullName }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="username" title="User Name" class="col-md-12" [headerStyle]="{
                 'background-color': '#004DD1',
                 'color' : '#fff',
                 'font-size':'13px',
-                'font-weight':'bold'
+                'font-weight':'bold',   'width':'10vw'
 
               }" [style]="{
                 'color': '#00153D',
-                'font-size' : '13px'
+                'font-size' : '13px',   'width':'10vw','text-align':'center'
             }">
-            <ng-template kendoGridCellTemplate let-userslist>
-                {{ userslist.username }}
-            </ng-template>
-        </kendo-grid-column>
-        <kendo-grid-column field="mobileNumber" title="Mobile Number" [width]="220" [headerStyle]="{
+      <ng-template kendoGridCellTemplate let-userslist>
+        {{ userslist.username }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="mobileNumber" title="Mobile Number" class="col-md-12" [headerStyle]="{
                 'background-color': '#004DD1',
                 'color' : '#fff',
                 'font-size':'13px',
-                'font-weight':'bold'
+                'font-weight':'bold',   'width':'10vw'
               }" [style]="{
                 'color': '#00153D',
-                'font-size' : '13px'
+                'font-size' : '13px',   'width':'10vw','text-align':'center'
             }">
-            <ng-template kendoGridCellTemplate let-userslist>
-                {{ userslist.mobileNumber }}
-            </ng-template>
-        </kendo-grid-column>
-        <!-- <kendo-grid-column-chooser></kendo-grid-column-chooser> -->
-        <kendo-grid-column field="createdDate" title="Created Date" [width]="220" [headerStyle]="{
-                'background-color': '#004DD1',
-                'color' : '#fff',
-                'font-size':'13px',
-                'font-weight':'bold'
-              }" [style]="{
-                'color': '#00153D',
-                'font-size' : '13px'
-            }">
-            <ng-template kendoGridCellTemplate let-userslist>
-                {{ userslist.createdDate |date: 'dd/MM/yyyy'}}
-            </ng-template>
-        </kendo-grid-column>
+      <ng-template kendoGridCellTemplate let-userslist>
+        {{ userslist.mobileNumber }}
+      </ng-template>
+    </kendo-grid-column>
 
-    </kendo-grid-column-group>
+    <kendo-grid-column field="createdDate" title="Created Date" class="col-md-12" [headerStyle]="{
+                'background-color': '#004DD1',
+                'color' : '#fff',
+                'font-size':'13px',
+                'font-weight':'bold',   'width':'10vw'
+              }" [style]="{
+                'color': '#00153D',
+                'font-size' : '13px',   'width':'10vw','text-align':'center'
+            }">
+      <ng-template kendoGridCellTemplate let-userslist>
+        {{ userslist.createdDate |date: 'dd/MM/yyyy'}}
+      </ng-template>
+    </kendo-grid-column>
+
+  </kendo-grid-column-group>
 
 
 </kendo-grid>

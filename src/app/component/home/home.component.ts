@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     this.id = localStorage.getItem('id')
   }
   ngOnInit() {
-    this.loginservices.GetOneUserData(this.id).subscribe(res => {
+    this.loginservices.getOneUserData(this.id).subscribe(res => {
       this.userData = res.data;    
     })
   }
@@ -36,13 +36,6 @@ export class HomeComponent implements OnInit {
     { text: "Security", icon: "k-i-settings" },
 
   ];
-  // openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-  //   this.dialog.open(CalenderComponent, {
-  //     width: '250px',
-  //     enterAnimationDuration,
-  //     exitAnimationDuration,
-  //   });
-  // }
   public onSelect(ev: DrawerSelectEvent): void {
     this.selected = ev.item.text;
     switch (this.selected) {
@@ -50,8 +43,7 @@ export class HomeComponent implements OnInit {
         this.router.navigate(["home/user"]);
         break;
       case "Edit User":
-        this.router.navigate(["home/edit"])
-        // this.router.navigate(["home/edit/id"]);
+        this.router.navigate(["home/edit"]);
         break;
       case "Calendar":
         this.router.navigate(["home/calender"]);
@@ -73,6 +65,6 @@ export class HomeComponent implements OnInit {
         break;
     }
 
-
+   
   }
 }

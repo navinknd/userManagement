@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     authData.username = this.loginForm.value.userName;
     authData.password = this.loginForm.value.password;
     this.loading = true;
-    this.getDataApi = this.loginservices.AuthUserData(authData).subscribe({
+    this.getDataApi = this.loginservices.authUserData(authData).subscribe({
       next: (res) => {
         this.loading = false;
         this.message = res;

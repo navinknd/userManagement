@@ -8,7 +8,6 @@ import { auth, Resister, viewUser } from '../models/login.model';
   providedIn: 'root'
 })
 export class LoginService {
-  // apiUrlForLogin = "https://localhost:44362/User";
   apiUrlForLogin:string;
   constructor(private http: HttpClient) {
     this.apiUrlForLogin=environment.api_url;
@@ -18,16 +17,16 @@ export class LoginService {
     let dataUrl: string = `${this.apiUrlForLogin}/getAll`;
     return this.http.get<viewUser>(dataUrl).pipe(catchError(this.handleError))
   }
-  CreateUserData(data: Resister): Observable<Resister> {
+  createUserData(data: Resister): Observable<Resister> {
     return this.http.post<Resister>(`${this.apiUrlForLogin}/register`, data)
   }
-  AuthUserData(data: auth): Observable<auth> {
+  authUserData(data: auth): Observable<auth> {
     return this.http.post<auth>(`${this.apiUrlForLogin}/authentication`, data)
   }
-  UpdateUserData(id: any, data: any): Observable<any> {
+  updateUserData(id: any, data: any): Observable<any> {
     return this.http.patch<any>(`${this.apiUrlForLogin}/update/${id}`, data)
   }
-  GetOneUserData(id: number): Observable<any> {
+  getOneUserData(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrlForLogin}/${id}`)
   }
   deleteUser(id: number): Observable<any> {

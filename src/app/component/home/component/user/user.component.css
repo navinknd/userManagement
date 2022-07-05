@@ -4,3 +4,8 @@
     color:#00153D;
     text-align: center;
 }
+:host ::ng-deep  .k-link{
+display: flex;
+justify-content: center !important;
+align-items: center;
+}
