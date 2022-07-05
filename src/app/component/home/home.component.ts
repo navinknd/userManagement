@@ -17,20 +17,14 @@ export class HomeComponent implements OnInit {
   message: any;
   constructor(private loginservices: LoginService, private router: Router, private toastr: ToastrService,public dialog: MatDialog) {
     this.id = localStorage.getItem('id')
-    console.log(this.id, "id");
   }
   ngOnInit() {
-
-
     this.loginservices.GetOneUserData(this.id).subscribe(res => {
-      this.userData = res.data;
-      console.log(this.userData);
-      
+      this.userData = res.data;    
     })
   }
  
   public selected = "User";
-
   public items: Array<DrawerItem> = [
     { text: "User", icon: "k-i-user", selected: true },
     { text: "Edit User", icon: "k-i-bell" },
@@ -51,7 +45,6 @@ export class HomeComponent implements OnInit {
   // }
   public onSelect(ev: DrawerSelectEvent): void {
     this.selected = ev.item.text;
-    console.log(this.selected);
     switch (this.selected) {
       case "User":
         this.router.navigate(["home/user"]);

@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
     //   this.title = (this.authType === 'register') ? 'Already have an account?...' : 'Create a new Account';
     //   this.buttonTitle = (this.authType === "login") ? 'login' : 'Register';
     //   this.buttonTitlelink = (this.authType !== "login") ? 'login' : 'Register';
-    //   console.log(`Auth Type : ${this.authType} , Title : ${this.title} , Button Title: ${this.buttonTitle}`);
+    //  
 
     //   if (this.authType === 'register') {
     //     this.authForm.addControl('confirmPassword', new FormControl('', Validators.required));
@@ -97,8 +97,6 @@ export class RegisterComponent implements OnInit {
   // }
 
   onFormSubmit(val: NgForm) {
-    console.log(val, "values");
-
     var registerData = new Resister();
     registerData.fullName = this.UserForm.value.fullname;
     registerData.username = this.UserForm.value.userName;
@@ -124,7 +122,6 @@ export class RegisterComponent implements OnInit {
         }
         else {
           this.toastr.warning(err.error.message);
-          console.log(err, "err in post method");
         }
         this.loading = false;
       }

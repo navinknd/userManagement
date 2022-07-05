@@ -13,8 +13,7 @@ export class LogoutComponent implements OnInit {
   userData: any;
   message: any;
   constructor(private loginservices: LoginService, private router: Router, private toastr: ToastrService,public dialog:DialogService) {
-    this.id = localStorage.getItem('id')
-    console.log(this.id, "id");  
+    this.id = localStorage.getItem('id');
   }
   ngOnInit(): void {
   }

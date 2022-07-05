@@ -40,36 +40,14 @@ export class UserComponent implements OnInit {
       type: this.type,
     }
   }
-
   editUser(event: any) {
-     console.log(event);
   }
   public close(status: string): void {
-    console.log(`Dialog result: ${status}`);
     this.opened = false;
   }
 
   public open(): void {
     this.opened = true;
   }
-  // toggleField(id:any) {
-  //   console.log("toggle----",id);
-  //   this.userslist.map((el: any) => {
-  //     if(el.id == id) {
-  //       el.isVisible = true;
-  //     } else {
-  //       el.isVisible = false;
-  //     }
-  //   })   
-  // }
-
-  // updateField(id:any){   
-  //   this.userslist.map((el: any) => {
-  //     if(el.id == id) {
-  //       el.isVisible = false;
-  //     } else {
-  //       el.isVisible = false;
-  //     }
-  //   })
-  // }
+  
 }
