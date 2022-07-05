@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
 
     this.loginservices.GetOneUserData(this.id).subscribe(res => {
       this.userData = res.data;
+      console.log(this.userData);
+      
     })
   }
  

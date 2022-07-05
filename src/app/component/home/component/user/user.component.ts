@@ -29,7 +29,6 @@ export class UserComponent implements OnInit {
     this.loginservices.getAllUserData().subscribe(res => {
       this.result = res;
       this.userslist = this.result.data;
-      console.log(this.userslist, "userslist");
     });
   }
 
@@ -44,10 +43,7 @@ export class UserComponent implements OnInit {
 
   editUser(event: any) {
      console.log(event);
-
   }
-
-
   public close(status: string): void {
     console.log(`Dialog result: ${status}`);
     this.opened = false;

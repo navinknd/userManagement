@@ -1,20 +1,22 @@
-<div class="container-fluid" style="padding-top:10%;" *ngIf="register">
+<app-loader *ngIf="loading"></app-loader>
+
+<div class="container-fluid" style="padding-top:10%;">
   <div class="col-md-4 mx-auto">
     <form [formGroup]="UserForm" class="k-block" (ngSubmit)="onFormSubmit(UserForm.value)" autocomplete="off">
       <h1 class="primary text-center ">Register</h1>
       <div class="text-center">
         <kendo-floatinglabel text="fullname">
-          <input kendoTextBox type="text" formControlName="fullname" />
+          <input kendoTextBox type="text" formControlName="fullname"  autocomplete="off" />
         </kendo-floatinglabel>
       </div>
       <div class="text-center">
         <kendo-floatinglabel text="User Name">
-          <input kendoTextBox type="text" formControlName="userName" />
+          <input kendoTextBox type="text" formControlName="userName"  autocomplete="off" />
         </kendo-floatinglabel>
       </div>
       <div class="text-center">
         <kendo-floatinglabel text="Mobile Number">
-          <input kendoTextBox type="text" formControlName="mobileNumber" />
+          <input kendoTextBox type="text" formControlName="mobileNumber" autocomplete="off"  />
         </kendo-floatinglabel>
       </div>
 
@@ -26,7 +28,7 @@
               </div> -->
       <div class="text-center">
         <kendo-floatinglabel text="password">
-          <input kendoTextBox [type]="passwordType" formControlName="password" />
+          <input kendoTextBox [type]="passwordType" formControlName="password" autocomplete="off" />
         </kendo-floatinglabel>
       </div>
       <div class="passwordDiv text-center mt-3">
@@ -47,5 +49,3 @@
     </form>
   </div>
 </div>
-
-<app-login *ngIf="login"></app-login>

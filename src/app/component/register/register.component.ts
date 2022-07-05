@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, NgForm, Validator, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Resister } from 'src/app/models/login.model';
 import { LoginService } from 'src/app/services/login.service';
@@ -12,18 +12,17 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class RegisterComponent implements OnInit {
   //  @ViewChild('fileInput') fileInput:any;
-
+  loading: boolean = false;
   authType = '';
   title = '';
   buttonTitle = '';
   buttonTitlelink = ''
 
-  login: boolean = false;
-  register: boolean = true;
   message: any;
   passwordType = "password";
   UserForm: FormGroup;
-  constructor(private fb: FormBuilder, private loginservices: LoginService, private toastr: ToastrService, private route: ActivatedRoute) {
+  getDataApi: any
+  constructor(private fb: FormBuilder, private loginservices: LoginService, private toastr: ToastrService, private route: ActivatedRoute,private router:Router) {
     this.UserForm = fb.group({});
   }
 
@@ -36,9 +35,9 @@ export class RegisterComponent implements OnInit {
     //   this.buttonTitlelink = (this.authType !== "login") ? 'login' : 'Register';
     //   console.log(`Auth Type : ${this.authType} , Title : ${this.title} , Button Title: ${this.buttonTitle}`);
 
-      //   if (this.authType === 'register') {
-      //     this.authForm.addControl('confirmPassword', new FormControl('', Validators.required));
-      // }
+    //   if (this.authType === 'register') {
+    //     this.authForm.addControl('confirmPassword', new FormControl('', Validators.required));
+    // }
     // });
 
     this.initializeFormData();
@@ -105,27 +104,36 @@ export class RegisterComponent implements OnInit {
     registerData.username = this.UserForm.value.userName;
     registerData.mobileNumber = this.UserForm.value.mobileNumber;
     registerData.password = this.UserForm.value.password;
-    this.loginservices.CreateUserData(registerData).subscribe(res => {
-      this.message = res;
-      if (this.message.message) {
-        this.toastr.success(this.message.message);
+    this.loading = true;
+    this.loginservices.CreateUserData(registerData).subscribe({
+      next: (res) => {
+        this.loading = false;
+        this.message = res;
+        if (this.message.message) {
+          this.toastr.success(this.message.message);
+        }
+        this.UserForm.reset();
+      },
+      error: (err) => {
+        if (err.error.isTrusted === true) {
+          this.toastr.warning("Something Went Wrong!...");
+        } else if (err.error.title) {
+          var message = "fill every field"
+          err.error.title = message;
+          this.toastr.warning(err.error.title);
+        }
+        else {
+          this.toastr.warning(err.error.message);
+          console.log(err, "err in post method");
+        }
+        this.loading = false;
       }
-      this.UserForm.reset();
-    }, err => {
-      
-      if (err.error.title) {
-        var message = "fill every field"
-        err.error.title = message;
-        this.toastr.warning(err.error.title);
-      } else
-        this.toastr.warning(err.error.message);
-      console.log(err, "err in post method");
     });
   }
   showlogin() {
+    this.router.navigate(["/login"]);
     localStorage.clear();
-    this.login = true;
-    this.register = false;
+
   }
   show() {
     this.passwordType = "text"
@@ -133,4 +141,7 @@ export class RegisterComponent implements OnInit {
   unshow() {
     this.passwordType = "password"
   }
+
 }
+
+

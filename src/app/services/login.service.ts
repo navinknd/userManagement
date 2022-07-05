@@ -34,7 +34,7 @@ export class LoginService {
     return this.http.delete(`${this.apiUrlForLogin}/delete/${id}`)
   }
 
-  getToken() {
+  getToken() {   
     return localStorage.getItem('token');
   }
 
