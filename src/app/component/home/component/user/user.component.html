@@ -1,8 +1,8 @@
 <kendo-grid [kendoGridBinding]="userslist" [pageSize]="pagesize" [pageable]="pagerSettings()" [resizable]="true"
   [sortable]="true" [filterable]="true" [selectable]="false" (cellClick)="editUser($event)">
 
-  <kendo-grid-column-group  title="User Details">
-    <kendo-grid-column field="id" title="ID" class="col-md-12"  [headerStyle]="{
+  <kendo-grid-column-group title="User Details">
+    <kendo-grid-column field="id" title="ID" class="col-md-12" [headerStyle]="{
             'background-color': '#004DD1',
             'color' : '#fff',
             'font-size':'13px',
@@ -12,7 +12,8 @@
           }" [style]="{
             'color': '#00153D',
             'font-size' : '13px',
-            'width':'10vw','text-align':'center'
+            'width':'10vw',
+            'text-align':'center'
         }">
       <ng-template kendoGridCellTemplate let-userslist #data let-rowIndex="rowIndex">
         {{ userslist.id }}
@@ -22,10 +23,13 @@
                 'background-color': '#004DD1',
                 'color' : '#fff',
                 'font-size':'13px',
-                'font-weight':'bold',   'width':'10vw'
+                'font-weight':'bold',
+                'width':'10vw'
               }" [style]="{
                 'color': '#00153D',
-                'font-size' : '13px',   'width':'10vw','text-align':'center'
+                'font-size' : '13px',
+                'width':'10vw',
+                'text-align':'center'
             }">
       <ng-template kendoGridCellTemplate let-userslist>
         {{ userslist.fullName }}
@@ -35,11 +39,14 @@
                 'background-color': '#004DD1',
                 'color' : '#fff',
                 'font-size':'13px',
-                'font-weight':'bold',   'width':'10vw'
+                'font-weight':'bold',
+                'width':'10vw'
 
-              }" [style]="{
+           }" [style]="{
                 'color': '#00153D',
-                'font-size' : '13px',   'width':'10vw','text-align':'center'
+                'font-size' : '13px',
+                'width':'10vw',
+                'text-align':'center'
             }">
       <ng-template kendoGridCellTemplate let-userslist>
         {{ userslist.username }}
@@ -49,10 +56,13 @@
                 'background-color': '#004DD1',
                 'color' : '#fff',
                 'font-size':'13px',
-                'font-weight':'bold',   'width':'10vw'
+                'font-weight':'bold',
+                'width':'10vw'
               }" [style]="{
                 'color': '#00153D',
-                'font-size' : '13px',   'width':'10vw','text-align':'center'
+                'font-size' : '13px',
+                'width':'10vw',
+                'text-align':'center'
             }">
       <ng-template kendoGridCellTemplate let-userslist>
         {{ userslist.mobileNumber }}

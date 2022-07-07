@@ -20,6 +20,7 @@ import { LogoutComponent } from './component/logout/logout.component';
 import { UserComponent } from './component/user/user.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { FavoriteComponent } from './component/favorite/favorite.component';
 
 @NgModule({
     imports: [
@@ -39,6 +40,7 @@ import { HomeComponent } from './home.component';
         LogoutComponent,
         DialogComponent,
         EditpageComponent,
+        FavoriteComponent,
     ], providers:[
 	],
 })

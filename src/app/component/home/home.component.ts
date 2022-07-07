@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
         this.router.navigate(["home/loader"]);
         break;
       case "Favourites":
-        this.router.navigate(["home/loader"]);
+        this.router.navigate(["home/favorite"]);
         break;
       case "Logout": this.router.navigate(['home/logout'])
 

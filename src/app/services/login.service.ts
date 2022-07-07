@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { auth, Resister, viewUser } from '../models/login.model';
 
@@ -15,22 +15,22 @@ export class LoginService {
 
   getAllUserData(): Observable<viewUser> {
     let dataUrl: string = `${this.apiUrlForLogin}/getAll`;
-    return this.http.get<viewUser>(dataUrl).pipe(catchError(this.handleError))
+    return this.http.get<viewUser>(dataUrl).pipe(catchError(this.handleError)).pipe(map(res => res));
   }
   createUserData(data: Resister): Observable<Resister> {
-    return this.http.post<Resister>(`${this.apiUrlForLogin}/register`, data)
+    return this.http.post<Resister>(`${this.apiUrlForLogin}/register`, data).pipe(map(res => res));
   }
   authUserData(data: auth): Observable<auth> {
-    return this.http.post<auth>(`${this.apiUrlForLogin}/authentication`, data)
+    return this.http.post<auth>(`${this.apiUrlForLogin}/authentication`, data).pipe(map(res => res));
   }
   updateUserData(id: any, data: any): Observable<any> {
-    return this.http.patch<any>(`${this.apiUrlForLogin}/update/${id}`, data)
+    return this.http.patch<any>(`${this.apiUrlForLogin}/update/${id}`, data).pipe(map(res => res));
   }
   getOneUserData(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrlForLogin}/${id}`)
+    return this.http.get<any>(`${this.apiUrlForLogin}/${id}`).pipe(map(res => res));
   }
   deleteUser(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrlForLogin}/delete/${id}`)
+    return this.http.delete(`${this.apiUrlForLogin}/delete/${id}`).pipe(map(res => res));
   }
 
   getToken() {   

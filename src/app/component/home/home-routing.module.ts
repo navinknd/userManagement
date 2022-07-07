@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoaderComponent } from '../loader/loader.component';
 import { CalenderComponent } from './component/calender/calender.component';
 import { EditpageComponent } from './component/editpage/editpage.component';
+import { FavoriteComponent } from './component/favorite/favorite.component';
 import { LogoutComponent } from './component/logout/logout.component';
 import { UserComponent } from './component/user/user.component';
 import { HomeComponent } from './home.component';
@@ -27,6 +28,9 @@ const routes: Routes = [
             },
             {
                 path: "edit", component: EditpageComponent
+            },
+            {
+                path:'favorite',component:FavoriteComponent
             }
         ]
     },

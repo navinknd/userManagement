@@ -1,0 +1,8 @@
+<div *ngFor="let person of data">
+    <pre>Name      :  {{person.name}}</pre>
+    <pre>Age       :  {{person.age}}</pre>
+    <pre>Job       :  {{person.job}}</pre>
+    <pre>Location  : {{person.location}}</pre>
+</div>
+<button (click)="showChange()" *ngIf="show" id="show" class="btn btn-info btn-sm">show Data</button>
+<button (click)="hideChange()" *ngIf="!show" id="hide" class="btn btn-warning btn-sm">Hide Data</button>
