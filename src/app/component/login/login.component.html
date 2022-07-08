@@ -2,30 +2,44 @@
 
 <div class="container-fluid">
   <div class="col-md-4 mx-auto" style="position:relative;top: 23%;">
-        <form [formGroup]="loginForm" class="k-block" (ngSubmit)="onFormSubmit(loginForm.value)" autocomplete="off">
-          <h1 class="primary text-center pt-3">Login</h1>
-          <div class="text-center">
-            <kendo-floatinglabel text="User Name">  
-              <input kendoTextBox  type="text" formControlName="userName" />
-            </kendo-floatinglabel>
+    <form [formGroup]="loginForm" class="k-block" (ngSubmit)="onFormSubmit(loginForm.value)" autocomplete="off">
+      <h1 class="primary text-center pt-3">{{buttonTitle}}</h1>
+      <div class="text-center">
+        <kendo-floatinglabel text="User Name">
+          <input kendoTextBox type="text" formControlName="userName" />
+          <div *ngIf="userName.invalid && (userName.dirty && userName.touched)">
+            <label *ngIf="userName.errors?.['required']" class="text-danger"> *user name is required.</label>
+            <label *ngIf="userName.errors?.['minlength']" class="text-danger">
+              *user name must have at least 3 character.
+            </label>
+            <label *ngIf="userName.errors?.['maxlength']" class="text-danger">
+              *user name must have at most 25 characters.
+            </label>
           </div>
-          <div class="text-center">
-            <kendo-floatinglabel text="password">
-              <input kendoTextBox [type]="password" formControlName="password" />
-            </kendo-floatinglabel>
-          </div>
-          <div class="passwordDiv text-center mt-3">
-            <div>
-              <p *ngIf="password=='password'" class="password">Show
-                Password<i class="fa-solid fa-eye passwordIcon secondary" (click)="show()"></i></p>
-              <p *ngIf="password=='text'" class="password">Hide
-                Password<i class="fa-solid fa-eye-slash passwordIcon secondary" (click)="unshow()"></i>
-              </p>
-            </div>
-            <button kendoButton type="submit"  [look]="'outline'">Login</button>
-           
-          </div>
-          <p class="mt-3 text-center">Don't have an account? <b class="success" (click)="showregister()">Register</b></p>
-        </form>
+        </kendo-floatinglabel>
+
+      </div>
+      <div class="text-center">
+        <kendo-floatinglabel text="password">
+          <input kendoTextBox [type]="password" formControlName="password" />
+        </kendo-floatinglabel>
+        <div *ngIf="pass.invalid && pass.touched">
+          <span *ngIf="pass.errors?.['required']" class="text-danger"> *password is required.</span>
+        </div>
+      </div>
+
+      <div class="passwordDiv text-center mt-3">
+        <div>
+          <p *ngIf="password=='password'" class="password">Show
+            Password<i class="fa-solid fa-eye passwordIcon secondary" (click)="show()"></i></p>
+          <p *ngIf="password=='text'" class="password">Hide
+            Password<i class="fa-solid fa-eye-slash passwordIcon secondary" (click)="unshow()"></i>
+          </p>
+        </div>
+        <button kendoButton type="submit" [look]="'outline'">{{buttonTitle}}</button>
+
+      </div>
+      <p class="mt-3 text-center">{{title}} <b class="success" (click)="showregister()">{{buttonTitlelink}}</b></p>
+    </form>
   </div>
 </div>

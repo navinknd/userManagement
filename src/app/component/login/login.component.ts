@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { auth } from 'src/app/models/login.model';
@@ -12,22 +12,45 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  authType = '';
+  title = '';
+  buttonTitle = '';
+  buttonTitlelink = ''
+
   message: any;
   password: string = "password";
   loginForm !: FormGroup;
   loading: boolean = false;
   getDataApi: any;
-  constructor(private fb: FormBuilder, private loginservices: LoginService, private route: Router, private toastr: ToastrService) { }
+  constructor(private fb: FormBuilder, private loginservices: LoginService, private route: Router, private toastr: ToastrService, private router: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    this.router.url.subscribe(data => {
+      this.authType = data[data.length - 1].path;
+      this.title = (this.authType === 'register') ? 'Already have an account?...' : 'Create a new Account?...';
+      this.buttonTitle = (this.authType === "login") ? 'login' : 'Register';
+      this.buttonTitlelink = (this.authType !== "login") ? 'login' : 'Register';
+    });
+
     this.initializeFormData();
   }
   initializeFormData() {
     this.loginForm = this.fb.group({
-      userName: ['', [Validators.required]],
+      userName: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(25),Validators.pattern("[a-zA-Z][a-zA-Z ]+")]],
       password: ['', [Validators.required]],
     })
   }
+
+    public get userName(): FormControl {
+    return this.loginForm.get('userName') as FormControl;
+  }
+
+   public get pass(): FormControl {
+    return this.loginForm.get('password') as FormControl;
+  }
+
   onFormSubmit(val: NgForm) {
     var authData = new auth();
     authData.username = this.loginForm.value.userName;

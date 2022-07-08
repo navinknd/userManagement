@@ -5,14 +5,15 @@ import { LoginComponent } from './component/login/login.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { RegisterComponent } from './component/register/register.component';
 
-
 const routes: Routes = [
-  { path: '', component: RegisterComponent },
   {
-
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'home/user'
+  },
+  {
     path: 'home', loadChildren: () => import('./component/home/home.module').then(x => x.HomeModule), 
      canActivate: [AuthGuard]
-
   },
   {
     path: "register", component: RegisterComponent

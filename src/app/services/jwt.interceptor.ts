@@ -17,6 +17,7 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let loginService = this.injector.get(LoginService);   
     let tokenizedReq = request.clone({
+      // url:request.url.replace('https','http'),
       setHeaders: {
         Authorization: `Bearer ${loginService.getToken()}`
       },

@@ -13,6 +13,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class RegisterComponent implements OnInit {
   //  @ViewChild('fileInput') fileInput:any;
   loading: boolean = false;
+
   authType = '';
   title = '';
   buttonTitle = '';
@@ -25,29 +26,22 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private loginservices: LoginService, private toastr: ToastrService, private route: ActivatedRoute,private router:Router) {
     this.UserForm = fb.group({});
   }
-
   ngOnInit(): void {
-
-    // this.route.url.subscribe(data => {
-    //   this.authType = data[data.length - 1].path;
-    //   this.title = (this.authType === 'register') ? 'Already have an account?...' : 'Create a new Account';
-    //   this.buttonTitle = (this.authType === "login") ? 'login' : 'Register';
-    //   this.buttonTitlelink = (this.authType !== "login") ? 'login' : 'Register';
-    //  
-
-    //   if (this.authType === 'register') {
-    //     this.authForm.addControl('confirmPassword', new FormControl('', Validators.required));
-    // }
-    // });
+    this.route.url.subscribe(data => {
+      this.authType = data[data.length - 1].path;
+      this.title = (this.authType === 'register') ? 'Already have an account?...' : 'Create a new Account';
+      this.buttonTitle = (this.authType === "login") ? 'login' : 'Register';
+      this.buttonTitlelink = (this.authType !== "login") ? 'login' : 'Register';
+    });
 
     this.initializeFormData();
   }
   initializeFormData() {
     this.UserForm = this.fb.group({
-      userName: ['', [Validators.required]],
-      fullname: ['', [Validators.required]],
+      userName: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(25),Validators.pattern("[a-zA-Z][a-zA-Z ]+")]],
+      fullname: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(25),Validators.pattern("[a-zA-Z][a-zA-Z ]+")]],
       password: ['', [Validators.required]],
-      mobileNumber: ['', [Validators.required]]
+      mobileNumber: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern("^[0-9]*$")]]
     })
 
     // this.UserForm = this.fb.group({
@@ -59,21 +53,21 @@ export class RegisterComponent implements OnInit {
   }
 
   //get set values method;-
-  // public get userName(): FormControl {
-  //   return this.UserForm.get('userName') as FormControl;
-  // }
-  // public get fullname(): FormControl {
-  //   return this.UserForm.get('fullname') as FormControl;
-  // }
-  // public get password(): FormControl {
-  //   return this.UserForm.get('password') as FormControl;
-  // }
-  // public get mobileNumber(): FormControl {
-  //   return this.UserForm.get('mobileNumber') as FormControl;
-  // }
-  // public get file(): FormControl {
-  //   return this.UserForm.get('file') as FormControl;
-  // }
+  public get userName(): FormControl {
+    return this.UserForm.get('userName') as FormControl;
+  }
+  public get fullname(): FormControl {
+    return this.UserForm.get('fullname') as FormControl;
+  }
+  public get password(): FormControl {
+    return this.UserForm.get('password') as FormControl;
+  }
+  public get mobileNumber(): FormControl {
+    return this.UserForm.get('mobileNumber') as FormControl;
+  }
+  public get file(): FormControl {
+    return this.UserForm.get('file') as FormControl;
+  }
 
   // clearform(){
   //   this.username.setValue('');
@@ -111,6 +105,7 @@ export class RegisterComponent implements OnInit {
           this.toastr.success(this.message.message);
         }
         this.UserForm.reset();
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         if (err.error.isTrusted === true) {
@@ -138,7 +133,6 @@ export class RegisterComponent implements OnInit {
   unshow() {
     this.passwordType = "password"
   }
-
 }
 
 
