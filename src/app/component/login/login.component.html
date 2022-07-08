@@ -9,12 +9,6 @@
           <input kendoTextBox type="text" formControlName="userName" />
           <div *ngIf="userName.invalid && (userName.dirty && userName.touched)">
             <label *ngIf="userName.errors?.['required']" class="text-danger"> *user name is required.</label>
-            <label *ngIf="userName.errors?.['minlength']" class="text-danger">
-              *user name must have at least 3 character.
-            </label>
-            <label *ngIf="userName.errors?.['maxlength']" class="text-danger">
-              *user name must have at most 25 characters.
-            </label>
           </div>
         </kendo-floatinglabel>
 
@@ -37,7 +31,6 @@
           </p>
         </div>
         <button kendoButton type="submit" [look]="'outline'">{{buttonTitle}}</button>
-
       </div>
       <p class="mt-3 text-center">{{title}} <b class="success" (click)="showregister()">{{buttonTitlelink}}</b></p>
     </form>

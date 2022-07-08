@@ -18,12 +18,13 @@ export class RegisterComponent implements OnInit {
   title = '';
   buttonTitle = '';
   buttonTitlelink = ''
-
+  tickIcon = "fa-solid fa-circle-check";
+  xmarkIcon = "fa-solid fa-circle-xmark";
   message: any;
   passwordType = "password";
   UserForm: FormGroup;
   getDataApi: any
-  constructor(private fb: FormBuilder, private loginservices: LoginService, private toastr: ToastrService, private route: ActivatedRoute,private router:Router) {
+  constructor(private fb: FormBuilder, private loginservices: LoginService, private toastr: ToastrService, private route: ActivatedRoute, private router: Router) {
     this.UserForm = fb.group({});
   }
   ngOnInit(): void {
@@ -38,12 +39,11 @@ export class RegisterComponent implements OnInit {
   }
   initializeFormData() {
     this.UserForm = this.fb.group({
-      userName: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(25),Validators.pattern("[a-zA-Z][a-zA-Z ]+")]],
-      fullname: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(25),Validators.pattern("[a-zA-Z][a-zA-Z ]+")]],
-      password: ['', [Validators.required]],
-      mobileNumber: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern("^[0-9]*$")]]
+      userName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(25), Validators.pattern("[a-zA-Z][a-zA-Z ]+")]],
+      fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(25), Validators.pattern("[a-zA-Z][a-zA-Z ]+")]],
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/)]],
+      mobileNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]]
     })
-
     // this.UserForm = this.fb.group({
     //   userName: this.fb.control('',[Validators.required]),
     //   fullname: this.fb.control('',[Validators.required]),
@@ -69,58 +69,42 @@ export class RegisterComponent implements OnInit {
     return this.UserForm.get('file') as FormControl;
   }
 
-  // clearform(){
-  //   this.username.setValue('');
-  //   this.fullname.setValue('');
-  //   this.password.setValue('');
-  //   this.mobileNumber.setValue('');
-  //   this.fileInput.nativeElement.value='';
-  // }
+  onFormSubmit(val: NgForm, valid: boolean) {
+    if (valid === true) {
+      var registerData = new Resister();
+      registerData.fullName = this.UserForm.value.fullname;
+      registerData.username = this.UserForm.value.userName;
+      registerData.mobileNumber = this.UserForm.value.mobileNumber;
+      registerData.password = this.UserForm.value.password;
+      this.loading = true;
+      this.loginservices.createUserData(registerData).subscribe({
+        next: (res) => {
+          this.loading = false;
+          this.message = res;
+          if (this.message.message) {
+            this.toastr.success(this.message.message);
+          }
+          this.UserForm.reset();
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          if (err.error.isTrusted === true) {
+            this.toastr.warning("Something Went Wrong!...");
+          } else if (err.error.title) {
+            var message = "fill every field"
+            err.error.title = message;
+            this.toastr.warning(err.error.title);
+          }
+          else {
+            this.toastr.warning(err.error.message);
+          }
+          this.loading = false;
+        }
+      });
+    } else {
+      this.toastr.warning("fill every field");
+    }
 
-  // addData() {
-  //   let registerdata = {
-  //     fullName: this.fullName.value,
-  //     username: this.username.value,
-  //     password: this.password.value,
-  //     mobileNumber: this.mobileNumber.value,
-  //   }
-  //   this.loginservices.CreateUserData(registerdata).subscribe(res => {
-  //     this.message.unshift(res);
-  //     this.clearform();
-  //   })
-  // }
-
-  onFormSubmit(val: NgForm) {
-    var registerData = new Resister();
-    registerData.fullName = this.UserForm.value.fullname;
-    registerData.username = this.UserForm.value.userName;
-    registerData.mobileNumber = this.UserForm.value.mobileNumber;
-    registerData.password = this.UserForm.value.password;
-    this.loading = true;
-    this.loginservices.createUserData(registerData).subscribe({
-      next: (res) => {
-        this.loading = false;
-        this.message = res;
-        if (this.message.message) {
-          this.toastr.success(this.message.message);
-        }
-        this.UserForm.reset();
-        this.router.navigate(['/login']);
-      },
-      error: (err) => {
-        if (err.error.isTrusted === true) {
-          this.toastr.warning("Something Went Wrong!...");
-        } else if (err.error.title) {
-          var message = "fill every field"
-          err.error.title = message;
-          this.toastr.warning(err.error.title);
-        }
-        else {
-          this.toastr.warning(err.error.message);
-        }
-        this.loading = false;
-      }
-    });
   }
   showlogin() {
     this.router.navigate(["/login"]);
@@ -133,6 +117,10 @@ export class RegisterComponent implements OnInit {
   unshow() {
     this.passwordType = "password"
   }
+
+
+
+
 }
 
 
