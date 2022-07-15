@@ -15,7 +15,7 @@ export class LoginService {
 
   getAllUserData(): Observable<viewUser> {
     let dataUrl: string = `${this.apiUrlForLogin}/getAll`;
-    return this.http.get<viewUser>(dataUrl).pipe(catchError(this.handleError)).pipe(map(res => res));
+    return this.http.get<viewUser>(dataUrl).pipe(catchError(this.handleError)).pipe(map((res:any) => res));
   }
   createUserData(data: Resister): Observable<Resister> {
     return this.http.post<Resister>(`${this.apiUrlForLogin}/register`, data).pipe(map(res => res));

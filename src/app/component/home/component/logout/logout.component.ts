@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { mergeMap, of } from 'rxjs';
 import { DialogService } from 'src/app/services/dialog.service';
 import { LoginService } from 'src/app/services/login.service';
 @Component({
@@ -9,11 +10,9 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./logout.component.css']
 })
 export class LogoutComponent implements OnInit {
-  id: any;
   userData: any;
   message: any;
   constructor(private loginservices: LoginService, private router: Router, private toastr: ToastrService,public dialog:DialogService) {
-    this.id = localStorage.getItem('id');
   }
   ngOnInit(): void {
   }
@@ -27,11 +26,15 @@ export class LogoutComponent implements OnInit {
     })
     .subscribe((yes) => {
       if (yes) {
-        this.loginservices.deleteUser(this.id).subscribe(res => {
+      of(Number(localStorage.getItem('id'))).pipe(mergeMap(id=>this.loginservices.deleteUser(id))).subscribe({
+        next:(res) => {
           this.message = res;
           this.toastr.success(this.message.message);
           this.router.navigate(['/register']);
-        });
+        },error:(err)=>{
+          console.log('error',err);
+        }
+      });
       }  else{
         this.toastr.info("You Cancelled Remove Account!...");
       }         

@@ -51,7 +51,6 @@ export class RegisterComponent implements OnInit {
     //   mobileNumber: this.fb.control('',[Validators.required])
     // });
   }
-
   //get set values method;-
   public get userName(): FormControl {
     return this.UserForm.get('userName') as FormControl;
@@ -104,7 +103,6 @@ export class RegisterComponent implements OnInit {
     } else {
       this.toastr.warning("fill every field");
     }
-
   }
   showlogin() {
     this.router.navigate(["/login"]);
@@ -117,10 +115,6 @@ export class RegisterComponent implements OnInit {
   unshow() {
     this.passwordType = "password"
   }
-
-
-
-
 }
 
 
