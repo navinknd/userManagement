@@ -1,21 +1,31 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, debounce, debounceTime, delay, from, map, Observable, of, retry, retryWhen, scan, shareReplay, throwError,Subject ,ReplaySubject} from 'rxjs';
+import { first, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { auth, Resister, viewUser } from '../models/login.model';
 
 @Injectable({
   providedIn: 'root'
 })
+
+
+
 export class LoginService {
-  apiUrlForLogin:string;
+  // behaSub!: BehaviorSubject<any>;
+  // behaOb$!: Observable<any>;
+
+  apiUrlForLogin: string;
   constructor(private http: HttpClient) {
-    this.apiUrlForLogin=environment.api_url;
+    this.apiUrlForLogin = environment.api_url;
+    // this.behaSub = new BehaviorSubject<any>(null);
+    // this.behaOb$ = this.behaSub.asObservable();
   }
+
 
   getAllUserData(): Observable<viewUser> {
     let dataUrl: string = `${this.apiUrlForLogin}/getAll`;
-    return this.http.get<viewUser>(dataUrl).pipe(catchError(this.handleError)).pipe(map((res:any) => res));
+    return this.http.get<viewUser>(dataUrl).pipe(catchError(this.handleError)).pipe(map((res: any) => res));
   }
   createUserData(data: Resister): Observable<Resister> {
     return this.http.post<Resister>(`${this.apiUrlForLogin}/register`, data).pipe(map(res => res));
@@ -33,10 +43,9 @@ export class LoginService {
     return this.http.delete(`${this.apiUrlForLogin}/delete/${id}`).pipe(map(res => res));
   }
 
-  getToken() {   
+  getToken() {
     return localStorage.getItem('token');
   }
-
 
 
   private handleError(error: HttpErrorResponse) {
@@ -45,7 +54,7 @@ export class LoginService {
       //client error 
       errorMessage = `An error occurred: ${error.error.message}`;
       console.error(errorMessage);
-      
+
     } else {
       //server side error
       errorMessage = `Backend returned code: ${error.status} \n body was:${error.message}`;
@@ -53,4 +62,10 @@ export class LoginService {
     }
     return throwError(errorMessage)
   }
+
+  // setBehaData(data:number) {
+  //   this.behaSub.next(data);
+  // }
+
+
 }

@@ -66,6 +66,7 @@ export class LoginComponent implements OnInit {
         if (this.message.token !== null) {
           localStorage.setItem('token', this.message.data.token)
           this.route.navigate(["home/user"]);
+          // this.loginservices.setBehaData(this.message.data.id);
           localStorage.setItem("id", this.message.data.id)
         }
         this.loginForm.reset();
