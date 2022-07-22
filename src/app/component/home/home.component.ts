@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     of(Number(localStorage.getItem('id'))).pipe(mergeMap(id => this.loginservices.getOneUserData(id))).subscribe({
       next: (res) => {
-        console.log("successs", res);
         this.userData = res;
       }, error: (err) => {
         console.log("error", err);
